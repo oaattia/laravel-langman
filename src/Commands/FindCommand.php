@@ -5,7 +5,6 @@ namespace Themsaid\Langman\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Themsaid\Langman\Manager;
-use Illuminate\Support\Str;
 
 class FindCommand extends Command
 {
@@ -41,6 +40,7 @@ class FindCommand extends Command
      * ListCommand constructor.
      *
      * @param \Themsaid\LangMan\Manager $manager
+     *
      * @return void
      */
     public function __construct(Manager $manager)
@@ -93,7 +93,7 @@ class FindCommand extends Command
                 $lines = $filesContent[$fileName][$languageKey] = Arr::dot($this->manager->getFileContent($filePath));
 
                 foreach ($lines as $key => $line) {
-                    if (! is_array($line) && stripos($line, $this->argument('keyword')) !== false) {
+                    if (!is_array($line) && stripos($line, $this->argument('keyword')) !== false) {
                         $output[$fileName.'.'.$key][$languageKey] = "<bg=yellow;fg=black>{$line}</>";
                     }
                 }
